@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const SkillCard = () => {
+const SkillCard = ({ skill }) => {
     return (
         <TouchableOpacity style={styles.buttonSkill}>
             <Text style={styles.textSkill} key={skill}>

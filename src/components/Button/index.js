@@ -1,16 +1,12 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Button = () => {
-    function handleAddNewSkill() {
-        setMySkills(oldState => [...oldState, newSkill]);
-    }
-
+const Button = ({ onPress }) => {
     return (
         <TouchableOpacity
             style={styles.button}
             activeOpacity={.7}
-            onPress={handleAddNewSkill}
+            onPress={onPress}
             >
             <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>

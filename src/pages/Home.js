@@ -14,6 +14,10 @@ const Home = () => {
     const [newSkill, setNewSkill] = useState('');
     const [mySkills, setMySkills] = useState([]);
 
+    function handleAddNewSkill() {
+        setMySkills(oldState => [...oldState, newSkill]);
+    }
+
     return (
         <>
             <View style={styles.container}>
@@ -25,7 +29,7 @@ const Home = () => {
                     onChangeText={setNewSkill}
                 />
 
-                <Button />
+                <Button onPress={handleAddNewSkill} />
 
                 <Text 
                     style={[styles.title, {marginVertical: 50}]}>
@@ -34,7 +38,7 @@ const Home = () => {
 
                 {   
                     mySkills.map(skill => (
-                        <SkillCard />
+                        <SkillCard skill={skill} />
                     ))
                 }
             </View>
