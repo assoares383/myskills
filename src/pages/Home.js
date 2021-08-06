@@ -4,7 +4,8 @@ import {
     Text,
     TextInput,
     StyleSheet, 
-    Platform 
+    Platform, 
+    FlatList
 } from 'react-native';
 
 import Button from '../components/Button';
@@ -36,11 +37,14 @@ const Home = () => {
                     My Skills
                 </Text>
 
-                {   
-                    mySkills.map(skill => (
-                        <SkillCard skill={skill} />
-                    ))
-                }
+                <FlatList 
+                    data={mySkills} 
+                    keyExtractor={item => item}
+                    renderItem={({ item }) => (
+                        <SkillCard skill={item} />
+                    )}
+                >
+                </FlatList> 
             </View>
         </>
     )
