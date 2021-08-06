@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
     View, 
     Text,
@@ -9,30 +9,49 @@ import {
 } from 'react-native';
 
 const Home = () => {
-  return (
-    <>
-      <View style={styles.container}>
-        <Text style={styles.title}>Welcome, Alexandre</Text>
-        <TextInput 
-            styles={ styles.input} 
-            placeholder="New Skill" 
-            placeholderTextColor="#555" 
-        />
+    const [newSkill, setNewSkill] = useState('');
+    const [mySkills, setMySkills] = useState([]);
 
-        <TouchableOpacity 
-            style={styles.button}
-            activeOpacity={.7}
-            >
-            <Text style={styles.buttonText}>Add</Text>
-        </TouchableOpacity> 
+    function handleAddNewSkill() {
+        setMySkills(oldState => [...oldState, newSkill]);
+    }
 
-        <Text 
-            style={[styles.title, {marginTop: 20}]}>
-            My Skills
-        </Text>
-      </View>
-    </>
-  )
+    return (
+        <>
+            <View style={styles.container}>
+                <Text style={styles.title}>Welcome, Alexandre</Text>
+                <TextInput 
+                    style={styles.input} 
+                    placeholder="New Skill" 
+                    placeholderTextColor="#555" 
+                    onChangeText={setNewSkill}
+                />
+
+                <TouchableOpacity 
+                    style={styles.button}
+                    activeOpacity={.7}
+                    onPress={handleAddNewSkill}
+                    >
+                    <Text style={styles.buttonText}>Add</Text>
+                </TouchableOpacity> 
+
+                <Text 
+                    style={[styles.title, {marginVertical: 50}]}>
+                    My Skills
+                </Text>
+
+                {   
+                    mySkills.map(skill => (
+                        <TouchableOpacity style={styles.buttonSkill}>
+                            <Text style={styles.textSkill} key={skill}>
+                                {skill}
+                            </Text>
+                        </TouchableOpacity>
+                    ))
+                }
+            </View>
+        </>
+    )
 };
 
 const styles = StyleSheet.create({
@@ -43,13 +62,13 @@ const styles = StyleSheet.create({
         paddingVertical: 70
     },
     title: {
-        color: '#ffffff',
+        color: '#FFF',
         fontSize: 24,
         fontWeight: 'bold'
     },
     input: {
-        backgroundColor: '#F2F2F2',
-        color: '#fff',
+        backgroundColor: '#1F1e25',
+        color: '#FFF',
         fontSize: 18,
         padding: Platform.Os === 'ios' ? 15 : 10,
         marginTop: 30,
@@ -66,6 +85,26 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 17,
         fontWeight: 'bold',
+    },
+    skill: {
+        color: '#FFF',
+        backgroundColor: '#1F1E25',
+        padding: 15,
+        fontSize: 22,
+        fontWeight: 'bold',
+        borderRadius: 20,
+    },
+    buttonSkill: {
+        backgroundColor: '#1F1E25',
+        padding: 15,
+        borderRadius: 50,
+        alignItems: 'center',
+        marginBottom: 12
+    },  
+    textSkill: {
+        color: '#FFF',
+        fontSize: 18,
+        fontWeight: 'bold'
     }
 });
 
